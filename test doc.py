@@ -1,5 +1,7 @@
 from tkinter import *
 import tkinter as tk
+import datetime
+import self as self
 import tk
 import yfinance as yf
 import openpyxl as xl
@@ -12,22 +14,34 @@ def get_current_price(symbol):
     todays_data = ticker.history(period='1d')
     return todays_data['Close'][0]
 
+#date & time for parsing 
+today = datetime.datetime.now()
+d = datetime.timedelta(days = 30)
+a = today - d
+#print(today.strftime('%Y-%m-%d'))
+print(a)
+
 
 # testing with yfinance package
-# msft = yf.Ticker("MSFT")
+msft = yf.Ticker("MSFT")
 # str = msft.info
 # hist = msft.history(period="max")
-# rec = msft.recommendations
-
-# test example
+rec = msft.recommendations
+reccc = str(rec)
+reccc.index(str(a))
+print(reccc)
+#print(rec)
+#test example
 recList = []
 q = 0
 tickerList = ["AAPL", "MSFT", "GOOGL", "ABNB", "AMZN", "SPY"]
-for tick in tickerList:
-    stockName = yf.Ticker(tickerList[q])
-    recList.append(stockName.recommendations)
-    q += 1
-print(recList[1])
+
+
+# for tick in tickerList:
+# stockName = yf.Ticker(tickerList[q])
+# recList.append(stockName.recommendations)
+# q += 1
+# print(recList[1])
 # function to get a list of prices
 def listPrice(tickerList):
     priceList = []
@@ -55,8 +69,8 @@ for col_num, data in enumerate(listPrice(tickerList)):
 for col_num, data in enumerate(tickerList):
     worksheet.write(0, col_num + 1, data)
 
-#for col_num, data in enumerate(tickerList):
-    #worksheet.write(2, col_num + 1, data)
+# for col_num, data in enumerate(tickerList):
+# worksheet.write(2, col_num + 1, data)
 
 workbook.close()
 # for x in tickerList:
