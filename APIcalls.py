@@ -62,6 +62,8 @@ def quoteUpdate(ticker):
     value_dict = quote(ticker)
     return ((value_dict['c'] - value_dict['o']) / value_dict['o'])
 
+print(techIndicator('DAL'))
+
 
 # (close - open) / open
 # value_dict = quote('AAPL')
