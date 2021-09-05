@@ -1,28 +1,8 @@
 import datetime
-import yfinance as yf
-import numpy as np
 import pandas as pd
-import openpyxl
-from openpyxl import load_workbook
-import xlsxwriter
-import xlrd
-from pathlib import Path
-from PythonPackage.APIcalls import analyst
-from PythonPackage.APIcalls import socialImpact
-from PythonPackage.APIcalls import insiderTrans
-from PythonPackage.APIcalls import techIndicator
-from PythonPackage.APIcalls import candles
-from PythonPackage.APIcalls import quote
-from PythonPackage.APIcalls import quoteUpdate
-from PythonPackage.APIcalls import getTicker
-from PythonPackage.APIcalls import aggregateIndicator
-
-
-# function returns current price of stock (DELETE)
-def get_current_price(symbol):
-    ticker = yf.Ticker(symbol)
-    todays_data = ticker.history(period='1d')
-    return todays_data['Close'][0]
+from APIcalls import analyst
+from APIcalls import quote
+from APIcalls import aggregateIndicator
 
 
 # Datetime to show the update timing
