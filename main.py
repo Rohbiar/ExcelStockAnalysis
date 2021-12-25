@@ -52,6 +52,7 @@ def quoteList(tickerList):
     storage = {}
     for row in range(len(tickerList)):
         storage = quote(tickerList[row])
+        print(storage)
         quoteList.append(storage['c'])
 
     return quoteList
@@ -78,7 +79,8 @@ def aggList(tickerList):
     storage_dict = {}
     for x in range(len(tickerList)):
         storage_dict = aggregateIndicator(tickerList[x])
-        aggList.append(storage_dict['technicalAnalysis']['signal'])
+        import pdb; pdb.set_trace()
+        aggList.append(storage_dict['technicalAnalysis']['buy'])
     return aggList
 
 
@@ -87,16 +89,15 @@ tickerList = readWbTicker()
 dates = dateList(tickerList)
 quoteList = quoteList(tickerList)
 recList = analystList(tickerList)
-aggregateList = aggList(tickerList)
+#aggregateList = aggList(tickerList)
 
 
-def writepanda(tickerList, dates, quoteList, recList, aggregateList):
+def writepanda(tickerList, dates, quoteList, recList):
     data = {
         'Ticker': tickerList,
         'Date': dates,
         'Price': quoteList,
-        'Analyst': recList,
-        'Aggregate': aggregateList
+        'Analyst': recList
     }
 
     row_labels = nameList
@@ -108,4 +109,4 @@ def writepanda(tickerList, dates, quoteList, recList, aggregateList):
     writer.save()
 
 
-writepanda(tickerList, dates, quoteList, recList, aggregateList)
+writepanda(tickerList, dates, quoteList, recList)
